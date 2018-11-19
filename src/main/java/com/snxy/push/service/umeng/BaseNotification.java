@@ -70,7 +70,7 @@ public abstract class BaseNotification {
 
     ///测试模式
     public void setTestMode() {
-        setProductionMode(true);
+        setProductionMode(false);
     }
 
     ///发送消息描述，建议填写。

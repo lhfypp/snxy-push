@@ -60,7 +60,7 @@ public class PushServiceImpl implements PushService {
         if (statusCode == RESPONSE_CODE_SUCCESS) {
             result = true;
             log.info("发送成功。。。");
-            log.info(respStr);
+            log.info("respStr:[{}]",respStr);
         } else {
             log.error("response:[{}]", respStr);
             //    throw new BizException(PUSH_ERROR_MSG);
@@ -167,6 +167,7 @@ public class PushServiceImpl implements PushService {
 
     //ios单播
     private boolean pushIOSUnicast(IOSMessageBody imb, String deviceToken) {
+        log.info("getIosAppKey:[{}]",pushConfigBean.getIosAppKey());
         IOSUnicast unicast = new IOSUnicast(pushConfigBean.getIosAppKey(), pushConfigBean.getIosAppMasterKey());
 
         unicast.setDeviceToken(deviceToken);
@@ -176,6 +177,7 @@ public class PushServiceImpl implements PushService {
     }
     //ios列播，不多于500个deviceToken
     private boolean pushIOSListcastIn500(IOSMessageBody imb, List<String> deviceTokens) {
+
         IOSListcast listcast = new IOSListcast(pushConfigBean.getIosAppKey(), pushConfigBean.getIosAppMasterKey());
 
         listcast.setDeviceToken(deviceTokens);
@@ -211,10 +213,16 @@ public class PushServiceImpl implements PushService {
         }
         iosNotification.setBadge(imb.getBadge());
         iosNotification.setSound(imb.getSound());
-        Map<String, String> extraDataMap = imb.getExtraDataMap();
-        for (Map.Entry<String, String> kv : extraDataMap.entrySet()) {
-            iosNotification.setCustomizedField(kv.getKey(), kv.getValue());//自定义字段
+        log.info("imb:[{}]",imb);
+        if(imb.getModuleType() == null){
+
+        }else {
+            Map<String, String> extraDataMap = imb.getExtraDataMap();
+            for (Map.Entry<String, String> kv : extraDataMap.entrySet()) {
+                iosNotification.setCustomizedField(kv.getKey(), kv.getValue());//自定义字段
+            }
         }
+
         //设置测试模式还是正式模式！！！！有问题
         if (pushConfigBean.getIosProductionMode()) {
             iosNotification.setProductionMode();

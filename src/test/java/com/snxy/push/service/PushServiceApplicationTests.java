@@ -26,10 +26,14 @@ public class PushServiceApplicationTests {
                 .title("通知标题")
                 .remark("通知文字描述")
                 .build();
+//        MessageInfo.DeviceInfo deviceInfo = MessageInfo.DeviceInfo.builder()
+//                                    .deviceToken("AvJ6ZFIOBCrikHSypa1LeaWS-i2i7kKcEcgxGkiOO_Ev")
+//                                    .phoneType("android")
+//                                    .build();
         MessageInfo.DeviceInfo deviceInfo = MessageInfo.DeviceInfo.builder()
-                                    .deviceToken("AvJ6ZFIOBCrikHSypa1LeaWS-i2i7kKcEcgxGkiOO_Ev")
-                                    .phoneType("android")
-                                    .build();
+                .deviceToken("a6e538702c70a5a4971d12ac27fea786bb00554424f03123d5c61400929d03b5")
+                .phoneType("ios")
+                .build();
         ArrayList<MessageInfo.DeviceInfo> deviceInfos = new ArrayList<>();
         deviceInfos.add(deviceInfo);
 
