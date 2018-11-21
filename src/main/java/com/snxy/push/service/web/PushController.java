@@ -4,6 +4,7 @@ import com.snxy.common.response.ResultData;
 import com.snxy.push.service.service.MessageInfo;
 import com.snxy.push.service.service.PushService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,7 +22,8 @@ public class PushController {
     PushService pushService;
 
     @RequestMapping("/send")
-    public ResultData send(MessageInfo messageInfo){
+    public ResultData send(@RequestBody MessageInfo messageInfo){
+        log.info("messageInfo:[{}]",messageInfo);
         boolean b = pushService.pushMessage(messageInfo);
         return ResultData.success("");
     }
